@@ -1,0 +1,12 @@
+{
+  "name": "brackets",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "docker build -t brackets .",
+    "test": "docker run brackets node index.js"
+  },
+  "author": "",
+  "license": "ISC"
+}

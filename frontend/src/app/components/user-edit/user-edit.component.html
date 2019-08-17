@@ -1,0 +1,69 @@
+<div class="container mat-elevation-z8">
+    <div class="loading-shade" *ngIf="isLoadingResults">
+        <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+    </div>
+    <div class="button-row">
+        <a mat-flat-button color="primary" (click)="userDetails()">
+            <mat-icon>info</mat-icon>
+        </a>
+    </div>
+    <mat-card class="card">
+        <form [formGroup]="userForm" (ngSubmit)="onFormSubmit(userForm.value)">
+            <mat-form-field class="full-width">
+                <input matInput placeholder="User Name" formControlName="name" [errorStateMatcher]="matcher">
+                <mat-error>
+                    <span *ngIf="!userForm.get('name').valid && userForm.get('name').touched">Please
+                        enter User Name</span>
+                </mat-error>
+            </mat-form-field>
+
+            <!-- input phone -->
+            <div>
+                <input type="number" [(ngModel)]="ddd" style="padding: 5px; margin-right: 10px" placeholder="ddd"
+                    [ngModelOptions]="{standalone: true}">
+                <input type="number" [(ngModel)]="phoneNumber" style="padding: 5px; margin-right: 10px"
+                    placeholder="number" [ngModelOptions]="{standalone: true}">
+                <mat-checkbox [(ngModel)]="isWhatsApp" [ngModelOptions]="{standalone: true}">WhatsApp</mat-checkbox>
+                <button mat-flat-button color="primary" type="button" (click)="addPhone()">adicionar</button>
+            </div>
+
+            <mat-card-content *ngIf="userForm.get('phones').value.length > 0">
+                <h1>Phones:</h1>
+                <mat-list role="list">
+                    <mat-list-item role="listitem" *ngFor="let phone of userForm.get('phones').value">
+                        ({{phone.ddd}}) {{phone.phoneNumber}}
+                        <img *ngIf="phone.isWhatsApp" src="assets/icons8-whatsapp-24.png" alt="whatsapp-icon">
+                        <button type="button" (click)='removePhone(phone)' mat-icon-button style="margin-left: 15%;"
+                            color="warn">
+                            <mat-icon>clear</mat-icon>
+                        </button>
+                    </mat-list-item>
+                </mat-list>
+            </mat-card-content>
+
+            <!-- input emails -->
+            <mat-grid-list cols="2" rowHeight="2:1" style="margin-bottom: 25px; margin-top: 25px;">
+                <input type="email" [(ngModel)]="email" matInput placeholder="Email"
+                    [ngModelOptions]="{standalone: true}">
+                <button mat-flat-button color="primary" type="button" (click)="addEmail()"
+                    style="margin-top: 25px;">adicionar</button>
+            </mat-grid-list>
+            <mat-card-content *ngIf="userForm.get('emails').value.length > 0">
+                <h1>Emails:</h1>
+                <mat-list role="list">
+                    <mat-list-item role="listitem" *ngFor="let email of userForm.get('emails').value">{{email}}
+                        <button type="button" (click)='removeEmail(email)' mat-icon-button style="margin-left: 15%;"
+                            color="warn">
+                            <mat-icon>clear</mat-icon>
+                        </button>
+                    </mat-list-item>
+                </mat-list>
+            </mat-card-content>
+            <div class="button-row">
+                <button type="submit" [disabled]="!userForm.valid" mat-flat-button color="primary">
+                    <mat-icon>save</mat-icon>
+                </button>
+            </div>
+        </form>
+    </mat-card>
+</div>

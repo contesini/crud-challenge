@@ -1,0 +1,40 @@
+<div class="container mat-elevation-z8">
+    <div class="loading-shade" *ngIf="isLoadingResults">
+        <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+    </div>
+    <div class="button-row">
+        <a mat-flat-button color="primary" [routerLink]="['/users']">
+            <mat-icon>list</mat-icon>
+        </a>
+    </div>
+    <mat-card class="card">
+        <mat-card-header>
+            <mat-card-title>
+                <h2>{{user.name | titlecase}}</h2>
+            </mat-card-title>
+        </mat-card-header>
+        <mat-card-content *ngIf="user.phones.length > 0">
+            <h1>Phones:</h1>
+            <mat-list role="list">
+                <mat-list-item role="listitem" *ngFor="let phone of user.phones">({{phone.ddd}}) {{phone.phoneNumber}}
+                    <img *ngIf="phone.isWhatsApp" src="assets/icons8-whatsapp-24.png" alt="whatsapp-icon">
+                </mat-list-item>
+            </mat-list>
+        </mat-card-content>
+        <mat-card-content *ngIf="user.emails.length > 0">
+            <h1>Emails:</h1>
+            <mat-list role="list">
+                <mat-list-item role="listitem" *ngFor="let email of user.emails">{{email}}
+                </mat-list-item>
+            </mat-list>
+        </mat-card-content>
+        <mat-card-actions>
+            <a mat-flat-button color="primary" [routerLink]="['/user-edit', user._id]">
+                <mat-icon>edit</mat-icon>
+            </a>
+            <a mat-flat-button color="warn" (click)="deleteUser(user._id)">
+                <mat-icon>delete</mat-icon>
+            </a>
+        </mat-card-actions>
+    </mat-card>
+</div>
