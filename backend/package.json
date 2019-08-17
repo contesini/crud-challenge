@@ -4,10 +4,10 @@
   "description": "",
   "main": "src/index.js",
   "scripts": {
-    "start": "npm run build:image && node src/index.js",
+    "start": "node src/index.js",
     "build:image": "docker build -t backend .",
-    "test": "npm run build:image && docker run backend node ./node_modules/nyc/bin/nyc ./node_modules/mocha/bin/mocha tests/*.js --exit",
-    "start:docker": "npm run build:image && docker-compose up"
+    "test": "npm run build:image && docker-compose run backend node ./node_modules/nyc/bin/nyc ./node_modules/mocha/bin/mocha tests/*.js --exit",
+    "start:docker": "npm run build:image && docker-compose up && x-www-browser http://localhost:3000"
   },
   "author": "",
   "license": "ISC",
