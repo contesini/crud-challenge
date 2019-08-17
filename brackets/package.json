@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "docker build -t brackets .",
-    "test": "docker run brackets node index.js"
+    "test": "npm run build && docker run brackets node index.js"
   },
   "author": "",
   "license": "ISC"

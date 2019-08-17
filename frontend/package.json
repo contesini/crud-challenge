@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "start:docker": "docker-compose up",
+    "start:docker": "npm run build:image && docker-compose up",
     "build": "ng build",
     "build:image": "docker build -t frontend .",
     "test": "ng test",
